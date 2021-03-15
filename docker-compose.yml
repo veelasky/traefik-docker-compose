@@ -1,0 +1,23 @@
+version: "3.3"
+services:
+## Traefik
+    traefik:
+        image: "traefik:v2.4"
+        container_name: "traefik"
+        ports:
+            - "80:80"
+            - "443:443"
+            - "8080:8080"
+        volumes:
+#            - "/opt/traefik:/etc/traefik"
+            - "/var/log/traefik:/var/log/traefik"
+            - "/var/run/docker.sock:/var/run/docker.sock:ro"
+        restart: always
+
+## WHOAMI Services
+    whoami:
+        image: "containous/whoami"
+        container_name: "whoami"
+        ports:
+            - "8081:80"
+        restart: always
